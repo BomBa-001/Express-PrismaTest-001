@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("SUPABASE_URL")
+}
+
+// @desc   Create people ....
+model people {
+  id        Int      @id @default(autoincrement()) // معرّف فريد للجدول.
+  name      String   @unique // المسمي
+  // org_Id  Int      @relation(fields: [org_Id], references: [id], in: org)
+  // phones    phone[]  @relation(fields: [id], references: [authorId]) // اقائمة مع جدول اخر والعلاقة المستخدمة one-meny
+  // images    image[]  @relation(fields: [id], references: [authorId]) // اقائمة مع جدول اخر والعلاقة المستخدمة one-meny
+  isActive  Boolean  @default(true) // ظاهر
+  location  String
+  notes     String
+  createdAt DateTime @default(now()) // وقت الإنشاء
+  updaetAt  DateTime @default(now()) // أخر وقت للتعديل
+  isShow    Boolean  @default(true) // ظاهر
+}
+
+
+
+// إنشاء الملفات
+//    npx prisma init --datasource-provider postgresql
+// لتهيئة بيئة العمل 
+//    npx prisma generate
+// لإنشاء أو تحديث جداول قاعدة البيانات بناءً على نماذج Prisma.
+//    npx prisma migrate dev --name init --create-only
+// لإنشاء أو تحديث جداول قاعدة البيانات بناءً على نماذج Prisma.
+//    npx prisma migrate deploy
